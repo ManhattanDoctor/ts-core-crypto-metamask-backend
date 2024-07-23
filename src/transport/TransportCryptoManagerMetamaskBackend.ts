@@ -9,7 +9,7 @@ export class TransportCryptoManagerMetamaskBackend extends TransportCryptoManage
     //
     // --------------------------------------------------------------------------
 
-    public static ALGORITHM = 'Ed25519Metamask';
+    public static ALGORITHM = 'KeccakMetamask';
 
     // --------------------------------------------------------------------------
     //
@@ -17,7 +17,7 @@ export class TransportCryptoManagerMetamaskBackend extends TransportCryptoManage
     //
     // --------------------------------------------------------------------------
 
-    constructor(protected wallet: any) {
+    constructor() {
         super();
     }
 
@@ -26,7 +26,6 @@ export class TransportCryptoManagerMetamaskBackend extends TransportCryptoManage
     //  Public Methods
     //
     // --------------------------------------------------------------------------
-
 
     public async sign<U>(command: ITransportCommand<U>, nonce: string, privateKey: string): Promise<string> {
         return personalSign({ data: this.toString(command, nonce), privateKey: Buffer.from(privateKey, 'hex') });
