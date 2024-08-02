@@ -2,6 +2,7 @@ import { ITransportCommand, ISignature, TransportCryptoManager } from '@ts-core/
 import { recoverPersonalSignature, personalSign } from '@metamask/eth-sig-util';
 import * as _ from 'lodash';
 
+
 export class TransportCryptoManagerMetamaskBackend extends TransportCryptoManager {
     // --------------------------------------------------------------------------
     //
