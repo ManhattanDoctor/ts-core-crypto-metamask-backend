@@ -1,7 +1,6 @@
-import { ITransportCommand, ISignature, TransportCryptoManager } from '@ts-core/common';
-import { recoverPersonalSignature, personalSign } from '@metamask/eth-sig-util';
+import { ITransportCommand, ISignature, TransportCryptoManager, TransformUtil, ObjectUtil } from '@ts-core/common';
+import { Metamask } from '../Metamask';
 import * as _ from 'lodash';
-
 
 export class TransportCryptoManagerMetamaskBackend extends TransportCryptoManager {
     // --------------------------------------------------------------------------
@@ -10,16 +9,16 @@ export class TransportCryptoManagerMetamaskBackend extends TransportCryptoManage
     //
     // --------------------------------------------------------------------------
 
-    public static ALGORITHM = 'KeccakMetamask';
+    public static ALGORITHM = Metamask.ALGORITHM;
 
     // --------------------------------------------------------------------------
     //
-    //  Constructor
+    //  Protected Methods
     //
     // --------------------------------------------------------------------------
 
-    constructor() {
-        super();
+    protected toStringRequest<U>(item: U): string {
+        return _.isObject(item) ? TransformUtil.fromJSON(ObjectUtil.sortKeys(item, true)) : item.toString();
     }
 
     // --------------------------------------------------------------------------
@@ -29,12 +28,11 @@ export class TransportCryptoManagerMetamaskBackend extends TransportCryptoManage
     // --------------------------------------------------------------------------
 
     public async sign<U>(command: ITransportCommand<U>, nonce: string, privateKey: string): Promise<string> {
-        return personalSign({ data: this.toString(command, nonce), privateKey: Buffer.from(privateKey, 'hex') });
+        return Metamask.sign(this.toString(command, nonce), privateKey);
     }
 
     public async verify<U>(command: ITransportCommand<U>, signature: ISignature): Promise<boolean> {
-        let address = recoverPersonalSignature({ data: this.toString(command, signature.nonce), signature: signature.value });
-        return address.toUpperCase() === signature.publicKey.toUpperCase();
+        return Metamask.verify(this.toString(command, signature.nonce), signature.value, signature.publicKey);
     }
 
     // --------------------------------------------------------------------------
