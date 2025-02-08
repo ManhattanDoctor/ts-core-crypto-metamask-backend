@@ -17,8 +17,8 @@
     },
     "license": "ISC",
     "dependencies": {
-        "@metamask/eth-sig-util": "^5.1.0",
-        "@ts-core/common": "~3.0.53"
+        "@ts-core/common": "~3.0.57",
+        "@metamask/eth-sig-util": "^5.1.0"
     },
     "devDependencies": {
         "@types/node": "^14.14.31",
