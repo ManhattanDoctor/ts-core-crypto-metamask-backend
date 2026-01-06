@@ -1,7 +1,7 @@
 {
     "name": "@ts-core/crypto-metamask-backend",
     "version": "3.1.3",
-    "description": "Classes and utils for crypto-metamask-backend",
+    "description": "Server-side TypeScript library for Ethereum/Metamask signature verification and signing using Keccak algorithm (EIP-191)",
     "main": "./cjs/public-api.js",
     "module": "./esm/public-api.js",
     "exports": {
@@ -29,7 +29,16 @@
         "url": "git+https://github.com/ManhattanDoctor/ts-core-crypto-metamask-backend.git"
     },
     "keywords": [
-        "typescript"
+        "typescript",
+        "metamask",
+        "ethereum",
+        "signature",
+        "verification",
+        "keccak",
+        "eip-191",
+        "web3",
+        "backend",
+        "ts-core"
     ],
     "bugs": {
         "url": "https://github.com/ManhattanDoctor/ts-core-crypto-metamask-backend/issues"
